@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Number Guessing Game";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-lg">
+
+                <div class="card-header bg-success text-white text-center">
+                    <h3>🎮 Number Guessing Game</h3>
+                </div>
+
+                <div class="card-body text-center">
+
+                    <p class="mb-3">Guess a number between <b>1 and 100</b></p>
+
+                    <div class="mb-3">
+                        <input type="number" id="guess" class="form-control" placeholder="Enter your guess">
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-primary" onclick="checkGuess()">
+                            Guess Number
+                        </button>
+                    </div>
+
+                    <p id="message" class="fw-bold"></p>
+
+                    <p id="attempts" class="text-muted"></p>
+
+                    <div class="d-grid">
+                        <button class="btn btn-outline-danger" onclick="restartGame()">
+                            Restart Game
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+    let attempts = 0;
+
+    function checkGuess() {
+
+        let userGuess = document.getElementById("guess").value;
+
+        attempts++;
+
+        if (userGuess == randomNumber) {
+
+            document.getElementById("message").innerHTML = "🎉 Correct! You guessed it!";
+            document.getElementById("message").style.color = "green";
+
+            document.getElementById("attempts").innerHTML = "Attempts: " + attempts;
+
+        }
+
+        else if (userGuess > randomNumber) {
+
+            document.getElementById("message").innerHTML = "📈 Too High! Try again.";
+            document.getElementById("message").style.color = "red";
+
+        }
+
+        else {
+
+            document.getElementById("message").innerHTML = "📉 Too Low! Try again.";
+            document.getElementById("message").style.color = "orange";
+
+        }
+
+    }
+
+    function restartGame() {
+
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        attempts = 0;
+
+        document.getElementById("message").innerHTML = "";
+
+        document.getElementById("attempts").innerHTML = "";
+
+        document.getElementById("guess").value = "";
+
+    }
+
+</script>

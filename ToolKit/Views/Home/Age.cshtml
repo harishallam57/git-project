@@ -1,0 +1,82 @@
+@{
+    ViewData["Title"] = "Age Calculator";
+}
+
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 fade-in-up">
+            <div class="glass-card p-5">
+                <div class="text-center mb-5">
+                    <span class="tool-icon">🎂</span>
+                    <h2 class="display-5 fw-bold gradient-text">Age Calculator</h2>
+                    <p class="text-muted">Discover your exact biological age with precision.</p>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-600 text-light-50 mb-3">Select Your Date of Birth</label>
+                    <input type="date" id="dob" class="form-control form-control-lg bg-dark border-secondary text-white p-3 px-4 rounded-pill">
+                </div>
+
+                <div class="d-grid gap-3">
+                    <button class="btn btn-premium btn-lg rounded-pill p-3" onclick="calculateAge()">
+                        Calculate Age Now
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg rounded-pill p-3" onclick="resetForm()">
+                        Clear Selection
+                    </button>
+                </div>
+
+                <div class="mt-5 text-center result-area" style="display: none;">
+                    <hr class="border-secondary opacity-25 mb-5">
+                    <h4 class="text-muted mb-2">Your exact age is:</h4>
+                    <h1 id="result" class="display-2 fw-800 mb-0 gradient-text"></h1>
+                    <p class="text-muted mt-2" id="resultDetails"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function calculateAge() {
+            const dobValue = document.getElementById("dob").value;
+            if (!dobValue) {
+                alert("Please select your date of birth");
+                return;
+            }
+
+            const birthDate = new Date(dobValue);
+            const today = new Date();
+            
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const resultElement = document.getElementById("result");
+            const resultDetails = document.getElementById("resultDetails");
+            const resultArea = document.querySelector(".result-area");
+
+            resultElement.innerText = years + " Years";
+            resultDetails.innerText = `${months} months and ${days} days`;
+            resultArea.style.display = "block";
+            resultArea.classList.add("fade-in-up");
+        }
+
+        function resetForm() {
+            document.getElementById("dob").value = "";
+            document.querySelector(".result-area").style.display = "none";
+        }
+    </script>
+}

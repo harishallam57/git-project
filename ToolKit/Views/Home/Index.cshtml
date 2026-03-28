@@ -1,0 +1,105 @@
+@{
+    ViewData["Title"] = "All Tools";
+}
+
+<div class="hero-section text-center">
+    <div class="container fade-in-up">
+        <h1 class="display-3 fw-800 mb-4"><span class="gradient-text">Developer Toolkit</span></h1>
+        <p class="lead mb-5 text-muted mx-auto" style="max-width: 600px;">
+            A curated collection of modern utilities designed to streamline your development workflow and boost productivity.
+        </p>
+        <a href="#explore" class="btn btn-premium btn-lg">Explore Tools</a>
+    </div>
+</div>
+
+<div class="container py-5" id="explore">
+    <div class="row g-4" id="toolsContainer">
+        <!-- Age Calculator -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up stagger-1">
+            <a asp-action="Age" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">🎂</span>
+                    <h3 class="mb-3 text-white fw-bold">Age Calculator</h3>
+                    <p class="text-muted">Instantly calculate your exact age with precision and ease.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Unit Converter -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up stagger-2">
+            <a asp-action="Unit" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">📏</span>
+                    <h3 class="mb-3 text-white fw-bold">Unit Converter</h3>
+                    <p class="text-muted">Effortlessly convert between various units across different systems.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Password Generator -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up stagger-3">
+            <a asp-action="Password" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">🔑</span>
+                    <h3 class="mb-3 text-white fw-bold">Password Generator</h3>
+                    <p class="text-muted">Generate high-security, randomized passwords in seconds.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Random Quote -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up">
+            <a asp-action="RandomQuote" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">💬</span>
+                    <h3 class="mb-3 text-white fw-bold">Random Quote</h3>
+                    <p class="text-muted">Stay inspired with a collection of curated wisdom from various thinkers.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Random Name Picker -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up">
+            <a asp-action="RandomName" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">🎲</span>
+                    <h3 class="mb-3 text-white fw-bold">Name Picker</h3>
+                    <p class="text-muted">Quickly pick a randomized name from a provided list for any occasion.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Number Guessing Game -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up">
+            <a asp-action="NumberGuessing" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">🎮</span>
+                    <h3 class="mb-3 text-white fw-bold">Guessing Game</h3>
+                    <p class="text-muted">A fun, interactive number guessing game for quick breaks.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Todo List -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up">
+            <a asp-action="ToDoList" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">📋</span>
+                    <h3 class="mb-3 text-white fw-bold">Todo List</h3>
+                    <p class="text-muted">Keep track of your tasks and boost your productivity efficiently.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Weather Checker -->
+        <div class="col-lg-4 col-md-6 tool-item fade-in-up">
+            <a asp-action="WeatherChecker" class="text-decoration-none">
+                <div class="glass-card text-center p-5 h-100">
+                    <span class="tool-icon">🌦</span>
+                    <h3 class="mb-3 text-white fw-bold">Weather Checker</h3>
+                    <p class="text-muted">Get real-time weather updates for your current or desired location.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

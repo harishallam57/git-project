@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Unit Converter";
+}
+
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 fade-in-up">
+            <div class="glass-card p-5">
+                <div class="text-center mb-5">
+                    <span class="tool-icon">📏</span>
+                    <h2 class="display-5 fw-bold gradient-text">Unit Converter</h2>
+                    <p class="text-muted">Effortlessly convert dimensions with modern precision.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12">
+                        <label class="form-label fw-600 text-light-50 mb-2">Value to Convert</label>
+                        <input type="number" id="inputValue" class="form-control form-control-lg bg-dark border-secondary text-white p-3 rounded-pill" placeholder="0.00">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label fw-600 text-light-50 mb-2">From Unit</label>
+                        <select id="fromUnit" class="form-select form-select-lg bg-dark border-secondary text-white p-3 rounded-pill">
+                            <option value="m">Meters (m)</option>
+                            <option value="km">Kilometers (km)</option>
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="in">Inches (in)</option>
+                            <option value="ft">Feet (ft)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-600 text-light-50 mb-2">To Unit</label>
+                        <select id="toUnit" class="form-select form-select-lg bg-dark border-secondary text-white p-3 rounded-pill">
+                            <option value="m">Meters (m)</option>
+                            <option value="km">Kilometers (km)</option>
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="in">Inches (in)</option>
+                            <option value="ft">Feet (ft)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-grid mt-5">
+                    <button class="btn btn-premium btn-lg rounded-pill p-3" onclick="convertUnit()">
+                        Convert Now
+                    </button>
+                </div>
+
+                <div class="mt-5 text-center result-area" style="display: none;">
+                    <hr class="border-secondary opacity-25 mb-4">
+                    <h4 class="text-muted mb-2">Result:</h4>
+                    <h1 id="result" class="display-3 fw-800 mb-0 gradient-text"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function convertUnit() {
+            const val = parseFloat(document.getElementById("inputValue").value);
+            if (isNaN(val)) {
+                alert("Please enter a valid number");
+                return;
+            }
+
+            const from = document.getElementById("fromUnit").value;
+            const to = document.getElementById("toUnit").value;
+            
+            // Standardize to Meters
+            let meters = val;
+            if (from === "km") meters = val * 1000;
+            if (from === "cm") meters = val / 100;
+            if (from === "in") meters = val * 0.0254;
+            if (from === "ft") meters = val * 0.3048;
+
+            // Convert from Meters to Target
+            let result = meters;
+            if (to === "km") result = meters / 1000;
+            if (to === "cm") result = meters * 100;
+            if (to === "in") result = meters / 0.0254;
+            if (to === "ft") result = meters / 0.3048;
+
+            const resElement = document.getElementById("result");
+            const resArea = document.querySelector(".result-area");
+
+            resElement.innerText = result.toLocaleString(undefined, { maximumFractionDigits: 4 }) + " " + to;
+            resArea.style.display = "block";
+            resArea.classList.add("fade-in-up");
+        }
+    </script>
+}
