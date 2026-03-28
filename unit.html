@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Converter - Developer Toolkit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <style>
+        :root { --bg-main: #0f172a; --bg-surface: rgba(30, 41, 59, 0.6); --primary: #6366f1; --primary-glow: rgba(99, 102, 241, 0.3); --secondary: #8b5cf6; --text-main: #f8fafc; --text-muted: #94a3b8; --border-glass: rgba(255, 255, 255, 0.1); }
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Outfit', sans-serif; min-height: 100vh; padding-top: 100px; }
+        .glass-card { background: var(--bg-surface); backdrop-filter: blur(12px); border: 1px solid var(--border-glass); border-radius: 20px; }
+        .navbar { background: rgba(15, 23, 42, 0.8) !important; backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-glass); padding: 1rem 0; z-index: 1000; }
+        .gradient-text { background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .btn-premium { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 600; box-shadow: 0 4px 15px var(--primary-glow); transition: 0.3s; }
+        .btn-premium:hover { transform: scale(1.05); }
+        .form-control, .form-select { background: #1e293b; border: 1px solid #334155; color: white; border-radius: 12px; padding: 12px 20px; }
+        .form-control:focus, .form-select:focus { background: #1e293b; border-color: var(--primary); color: white; box-shadow: 0 0 10px var(--primary-glow); }
+        .tool-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="index.html"><span class="gradient-text">🛠 ToolKit</span></a>
+            <a href="index.html" class="btn btn-outline-light rounded-pill">Back Home</a>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 fade-in-up">
+                <div class="glass-card p-5">
+                    <div class="text-center mb-5">
+                        <span class="tool-icon">📏</span>
+                        <h2 class="display-5 fw-bold gradient-text">Unit Converter</h2>
+                        <p class="text-muted">Effortlessly convert dimensions with modern precision.</p>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-12"><label class="form-label fw-600 mb-2">Value to Convert</label><input type="number" id="inputValue" class="form-control" placeholder="0.00"></div>
+                        <div class="col-md-6"><label class="form-label fw-600 mb-2">From</label><select id="fromUnit" class="form-select"><option value="m">Meters (m)</option><option value="km">Kilometers (km)</option><option value="cm">Centimeters (cm)</option><option value="in">Inches (in)</option><option value="ft">Feet (ft)</option></select></div>
+                        <div class="col-md-6"><label class="form-label fw-600 mb-2">To</label><select id="toUnit" class="form-select"><option value="m">Meters (m)</option><option value="km">Kilometers (km)</option><option value="cm">Centimeters (cm)</option><option value="in">Inches (in)</option><option value="ft">Feet (ft)</option></select></div>
+                    </div>
+                    <div class="d-grid mt-5"><button class="btn btn-premium btn-lg" onclick="convertUnit()">Convert Now</button></div>
+                    <div class="mt-5 text-center result-area" style="display: none;"><hr class="opacity-25 mb-4"><h4 class="text-muted">Result:</h4><h1 id="result" class="display-3 fw-800 gradient-text"></h1></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertUnit() {
+            const val = parseFloat(document.getElementById("inputValue").value);
+            if (isNaN(val)) return alert("Please enter a valid number");
+            const from = document.getElementById("fromUnit").value;
+            const to = document.getElementById("toUnit").value;
+            let meters = val;
+            if (from === "km") meters = val * 1000;
+            if (from === "cm") meters = val / 100;
+            if (from === "in") meters = val * 0.0254;
+            if (from === "ft") meters = val * 0.3048;
+            let result = meters;
+            if (to === "km") result = meters / 1000;
+            if (to === "cm") result = meters * 100;
+            if (to === "in") result = meters / 0.0254;
+            if (to === "ft") result = meters / 0.3048;
+            document.getElementById("result").innerText = result.toLocaleString(undefined, { maximumFractionDigits: 4 }) + " " + to;
+            document.querySelector(".result-area").style.display = "block";
+            document.querySelector(".result-area").classList.add("fade-in-up");
+        }
+    </script>
+</body>
+</html>
